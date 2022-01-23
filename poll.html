@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Telegram poling app</title>
+  <link rel="stylesheet" href="pole.css">
+</head>
+<body>
+  <div class="wrapper">
+    <header id="question"></header>
+    <div class="poll-area">
+      <input type="checkbox" name="poll" id="opt-1">
+      <input type="checkbox" name="poll" id="opt-2">
+      <label for="opt-1" class="opt-1">
+        <div class="row">
+          <div class="column">
+            <span class="circle"></span>
+            <span id="opt1"></span>
+          </div>
+          <span id="percent1"></span>
+        </div>
+        
+      </label>
+      <label for="opt-2" class="opt-2">
+        <div class="row">
+          <div class="column">
+            <span class="circle"></span>
+            <span class="text" id="opt2"></span>
+          </div>
+          <span id="percent2"></span>
+        </div>
+        
+      </label>
+    </div>
+    <button><a  id="change_question" href="./form.html">Change Question</a></button>
+  </div>
+
+ 
+
+</body>
+
+<script>
+  const question=localStorage.getItem("Question")
+  const opt1=localStorage.getItem("option1")
+  const opt2=localStorage.getItem("option2")
+
+  const q=document.getElementById("question")
+  const input1=document.getElementById("opt-1")
+  const input2=document.getElementById("opt-2")
+
+  const optt1=document.getElementById("opt1")
+  const optt2=document.getElementById("opt2")
+
+  const p1=document.getElementById("percent1")
+  const p2=document.getElementById("percent2")
+
+  total=localStorage.getItem("totalclicks")
+  const pt1=localStorage.getItem("Opt1click")
+
+
+  crtpercent1=((100*pt1)/total).toFixed(0)
+
+
+
+  q.innerHTML = question;
+  optt1.innerHTML = opt1;
+  optt2.innerHTML = opt2;
+
+  opt1click=pt1;
+  opt2click=localStorage.getItem("Opt2click");
+  totalclicks=total;
+
+  input1.addEventListener("click",()=>{
+  opt1click++;
+  totalclicks++;
+  localStorage.setItem("totalclicks", totalclicks);
+  localStorage.setItem("Opt1click", opt1click);
+
+  const p1=document.getElementById("percent1")
+  percent1=localStorage.getItem("Opt1click")
+  total1=localStorage.getItem("totalclicks")
+  crtpercent1=((100*percent1)/total1).toFixed(0)
+  const p2=document.getElementById("percent2")
+  p1.innerHTML=crtpercent1+"%" 
+  p2.innerHTML=100-crtpercent1+"%" 
+
+})
+  input2.addEventListener("click",()=>{
+      opt2click++;
+      totalclicks++;
+      localStorage.setItem("totalclicks", totalclicks);
+      localStorage.setItem("Opt2click", opt2click);
+
+      const p2=document.getElementById("percent2")
+      percent2=localStorage.getItem("Opt2click")
+      total2=localStorage.getItem("totalclicks")
+      crtpercent2=((100*percent2)/total2).toFixed(0)
+      const p1=document.getElementById("percent1") 
+      p2.innerHTML=crtpercent2+"%"
+      p1.innerHTML=100-crtpercent2+"%"
+      
+  })
+
+</script>
+</html>
